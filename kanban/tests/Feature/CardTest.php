@@ -58,6 +58,12 @@ class CardTest extends TestCase
         $this->assert_get_200($response);
     }
 
+    public function test_post_cards(){
+
+        $response = $this->postJson('/api/cards', []);
+        $this->assertEquals(201, $response->getStatusCode());
+    }
+
 
 
 
