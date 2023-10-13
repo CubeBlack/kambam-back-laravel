@@ -28,6 +28,6 @@ class CardController extends Controller
 
         $card = Card::create($request->all());
 
-        return response(201)->json($card);
+        return response()->json($card);
     }
 }

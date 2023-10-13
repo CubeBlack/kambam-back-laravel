@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Card extends Model
 {
     use HasFactory;
+    protected $fillable = ['project', 'group', 'title', 'status', 'description'];
 }
