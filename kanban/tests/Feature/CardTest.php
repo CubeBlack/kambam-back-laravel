@@ -64,6 +64,19 @@ class CardTest extends TestCase
         $this->assertEquals(201, $response->getStatusCode());
     }
 
+    public function test_put_card_id(){
+        $cardFatctory = Card::factory()->create();
+        
+        $response = $this->putJson('/api/cards/1',[
+            'project'=>'fgsdfg',
+            'group'=>'fgsdfg',
+            'title'=>'fgsdfg',
+            'status'=>'fgsdfg',
+            'description'=>'fgsdfg',
+        ]);
+        
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
 
 

@@ -30,4 +30,18 @@ class CardController extends Controller
 
         return response()->json($card);
     }
+
+    public function update(Request $request, $id){
+        $request->validate([
+            'project' => 'required',
+            'group' => 'required',
+            'status'=> 'required',
+            'title'=> 'required',
+            'description'=> 'required'
+            
+        ]);
+        //$card = Card::update($request);
+        $card = Card::whereId($id)->update($request->all());
+        return response()->json($card);
+    }   
 }
