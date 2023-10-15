@@ -9,7 +9,11 @@ class CardController extends Controller
 {
 
     public function index(){
-        return response()->json(Card::all());
+        $cards = Card::orderBy('project')
+            ->orderBy('group')
+            ->get();
+
+        return response()->json($cards);
     }
 
     public function show($id){

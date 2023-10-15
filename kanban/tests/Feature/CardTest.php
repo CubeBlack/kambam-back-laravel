@@ -40,9 +40,7 @@ class CardTest extends TestCase
 
     public function test_get_cards()
     {
-        $cardFatctory = Card::factory()->create();
-        $cardFatctory = Card::factory()->create();
-        $cardFatctory = Card::factory()->create();
+        $users = Card::factory()->count(3)->create();
 
 
         $response = $this->getJson('/api/cards');
@@ -50,6 +48,31 @@ class CardTest extends TestCase
         $this->assert_get_200($response);
         $this->assert_cout_card_in_list($response, 3);
         $this->assert_card_list_struct($response);
+    }
+
+    public function test_get_cards_order_by_project_group(){
+        
+        $itens = Card::factory()->count(10)->create();
+
+        $response = $this->get('/api/cards');
+        $response->assertStatus(200);
+        $response->assertJsonCount(10);
+
+        $lastProject = '';
+        $lastGroup = '';
+        foreach ($response->json() as $item) {
+            if (strcasecmp($item['project'], $lastProject) > 0) {
+                $this->assertGreaterThanOrEqual($lastProject, $item['project']);
+            } 
+
+            if (strcasecmp($item['group'], $lastGroup) > 0) {
+                $this->assertGreaterThanOrEqual($lastGroup, $item['group']);
+            } 
+
+            $lastProject = $item['project'];
+            $lastGroup = $item['group'];
+        }
+
     }
 
     public function test_get_card_id(){
