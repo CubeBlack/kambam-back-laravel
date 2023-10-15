@@ -3,12 +3,12 @@ Back-end kanban em laravel
 
 # Deploy on windons using XAMPP
 
-* criar banco de dados
+* Create datebas
 * Clone project
   
   git clone https://github.com/CubeBlack/kanban-back-laravel.git
 
-* criar e editar arquivo de configuração(kanban/.env)
+* Create and edit config file(kanban/.env)
 * Gerar chave de criptografia
   
   php artisan key:generate
