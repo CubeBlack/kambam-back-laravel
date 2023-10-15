@@ -53,14 +53,21 @@ class CardTest extends TestCase
     }
 
     public function test_get_card_id(){
-        Card::factory()->create();
-        $response = $this->getJson('/api/cards/1');
-        $this->assert_get_200($response);
+       $card = Card::factory()->create();
+
+        $response = $this->getJson("/api/cards/{$card['id']}");
+        $response->assertStatus(200);
     }
 
     public function test_post_cards(){
 
-        $response = $this->postJson('/api/cards', []);
+        $response = $this->postJson('/api/cards', [
+            'project'=>'fgsdfg',
+            'group'=>'fgsdfg',
+            'title'=>'fgsdfg',
+            'status'=>'fgsdfg',
+            'description'=>'fgsdfg',
+        ]);
         $this->assertEquals(201, $response->getStatusCode());
     }
 

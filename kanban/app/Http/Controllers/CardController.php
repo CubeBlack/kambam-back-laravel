@@ -13,7 +13,9 @@ class CardController extends Controller
     }
 
     public function show($id){
-        return response()->json(Card::findOrFail($id));
+        $card = Card::findOrFail($id);
+        //var_dump($card);
+        return response()->json($card);
     }
 
     public function store(Request $request){
@@ -28,7 +30,7 @@ class CardController extends Controller
 
         $card = Card::create($request->all());
 
-        return response()->json($card);
+        return response()->json($card, 201);
     }
 
     public function update(Request $request, $id){
